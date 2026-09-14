@@ -1096,5 +1096,111 @@ const LPJ_DATA = {
       "desc": "Kajian model bisnis syariah, inovasi urbanisme baru, efisiensi sumber daya, dan kota berorientasi komunitas."
     }
   ]
+},
+  keuangan: {
+  "title": "Laporan Keuangan PC ISNU Kota Surabaya Periode 2022-2026",
+  "summary": "Laporan Keuangan PC ISNU Kota Surabaya Periode 2022–2026 menyajikan rekapitulasi alur kas masuk dan kas keluar organisasi secara transparan dan akuntabel. Sumber pemasukan kas organisasi bersumber dari sisa saldo Konfercab V, iuran wajib & sukarela pengurus, serta bantuan donatur institusi/perorangan (seperti Bapak Mahirul Mursid, Rektor UPN, dr. Abraham Ali Firdaus, dll.). Sebagian besar penggunaan anggaran dialokasikan langsung untuk pelaksanaan program khidmah sosial kemasyarakatan unggulan (seperti Pelaksanaan Sunatan Massal Gratis di Kampus A UNUSA) dan kegiatan operasional kepengurusan.",
+  "totals": {
+    "pemasukan": 26976000,
+    "pengeluaran": 20676000,
+    "saldo": 6300000
+  },
+  "sumberPemasukan": [
+    {
+      "category": "Donatur Perorangan & Tokoh Akademisi (Bpk. Mahirul Mursid, Rektor UPN, dr. Abraham)",
+      "amount": 13500000,
+      "percentage": "50.0%"
+    },
+    {
+      "category": "Iuran Wajib & Sukarela Pengurus PC ISNU",
+      "amount": 10800000,
+      "percentage": "40.0%"
+    },
+    {
+      "category": "Sisa Dana Konfercab V & Saldo Kas Pengurus",
+      "amount": 2676000,
+      "percentage": "10.0%"
+    }
+  ],
+  "items": [
+    {
+      "tgl": "25/01/2023",
+      "uraian": "Sisa Konfercab V",
+      "pemasukan": 2324000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "10/01/2023",
+      "uraian": "Pemasukan Iuran Sukarela Pengurus",
+      "pemasukan": 1000000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "10/01/2023",
+      "uraian": "Pemasukan Iuran Wajib Pengurus",
+      "pemasukan": 4100000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "12/03/2023",
+      "uraian": "Karangan Bunga untuk Bpk. Prof. Jadid",
+      "pemasukan": 0,
+      "pengeluaran": 500000
+    },
+    {
+      "tgl": "17/05/2023",
+      "uraian": "Tarik Tunai Ketua ISNU untuk Operasional Kegiatan",
+      "pemasukan": 0,
+      "pengeluaran": 3000000
+    },
+    {
+      "tgl": "16/05/2025",
+      "uraian": "Donatur dari Bapak Mahirul Mursid",
+      "pemasukan": 5000000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "01/01/2025",
+      "uraian": "Pemasukan Iuran Wajib Pengurus",
+      "pemasukan": 5700000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "01/01/2025",
+      "uraian": "Donatur dari Bapak Mahirul Mursid",
+      "pemasukan": 5000000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "01/01/2025",
+      "uraian": "Donatur dari Rektor UPN",
+      "pemasukan": 1000000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "-",
+      "uraian": "Saldo Pengisian Kas Bu Firdaus",
+      "pemasukan": 30000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "-",
+      "uraian": "Saldo Pengisian Kas Pak Ketua",
+      "pemasukan": 322000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "08/01/2025",
+      "uraian": "Donasi dr. Abraham Ali Firdaus",
+      "pemasukan": 2500000,
+      "pengeluaran": 0
+    },
+    {
+      "tgl": "03/01/2025",
+      "uraian": "Pelaksanaan Program Sunatan Massal Gratis UNUSA",
+      "pemasukan": 0,
+      "pengeluaran": 17176000
+    }
+  ]
 }
 };

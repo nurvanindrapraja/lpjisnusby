@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRoadmapAndSOP();
   initJOSHNU();
   initKegiatanSection();
+  initKeuanganSection();
 });
 
 // 1. Navigation & Tab Switching
@@ -48,13 +49,11 @@ function initNavigation() {
 
 // Global Helper to navigate directly to a Seksi in Kegiatan tab
 function navigateToSeksi(seksiName) {
-  // 1. Activate 'kegiatan' tab in main nav
   const kegiatanBtn = document.querySelector('.nav-item[data-tab="kegiatan"]');
   if (kegiatanBtn) {
     kegiatanBtn.click();
   }
 
-  // 2. Activate the target Seksi sub-tab
   const seksiTabBtns = document.querySelectorAll('.seksi-tab-btn');
   let targetBtn = null;
 
@@ -69,7 +68,6 @@ function navigateToSeksi(seksiName) {
     targetBtn.click();
   }
 
-  // 3. Scroll top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -102,7 +100,6 @@ function initSKandStructure() {
 
 // 4. Roadmap & SOP Init
 function initRoadmapAndSOP() {
-  // Roadmap Pillars
   const pillarsGrid = document.getElementById('roadmapPillars');
   if (pillarsGrid) {
     pillarsGrid.innerHTML = LPJ_DATA.roadmap.pillars.map(p => `
@@ -113,7 +110,6 @@ function initRoadmapAndSOP() {
     `).join('');
   }
 
-  // SOP Grid
   const sopGrid = document.getElementById('sopGridContainer');
   if (sopGrid) {
     sopGrid.innerHTML = LPJ_DATA.sopFiles.map(sop => `
@@ -200,7 +196,6 @@ function renderKegiatanGrid() {
   if (!container) return;
 
   let filtered = LPJ_DATA.activities.filter(act => {
-    // Seksi filter
     if (currentSeksiFilter !== 'ALL') {
       const targetFilter = currentSeksiFilter.trim().toUpperCase().replace('SEKSI ', '');
       const s1 = act.seksi1.trim().toUpperCase().replace('SEKSI ', '');
@@ -210,18 +205,15 @@ function renderKegiatanGrid() {
       }
     }
 
-    // Role filter
     if (currentRoleFilter !== 'ALL' && act.peran.toLowerCase() !== currentRoleFilter.toLowerCase()) {
       return false;
     }
 
-    // Year filter
     if (currentYearFilter !== 'ALL') {
       const year = act.tgl.substring(0, 4);
       if (year !== currentYearFilter) return false;
     }
 
-    // Search query
     if (currentSearchQuery) {
       const matchTitle = act.kegiatan.toLowerCase().includes(currentSearchQuery);
       const matchLoc = act.lokasi.toLowerCase().includes(currentSearchQuery);
@@ -280,7 +272,85 @@ function renderKegiatanGrid() {
   }).join('');
 }
 
-// 7. Modal Activity Detail
+// 7. Laporan Keuangan Section Init
+function initKeuanganSection() {
+  const fin = LPJ_DATA.keuangan;
+  if (!fin) return;
+
+  const summaryTextElem = document.getElementById('keuanganSummaryText');
+  if (summaryTextElem) {
+    summaryTextElem.textContent = fin.summary;
+  }
+
+  const statPemasukan = document.getElementById('finStatPemasukan');
+  const statPengeluaran = document.getElementById('finStatPengeluaran');
+  const statSaldo = document.getElementById('finStatSaldo');
+
+  if (statPemasukan) statPemasukan.textContent = formatRupiah(fin.totals.pemasukan);
+  if (statPengeluaran) statPengeluaran.textContent = formatRupiah(fin.totals.pengeluaran);
+  if (statSaldo) statSaldo.textContent = formatRupiah(fin.totals.saldo);
+
+  // Render Financial Table
+  const tableContainer = document.getElementById('keuanganTableContainer');
+  if (tableContainer) {
+    let tableHtml = `
+      <table class="keuangan-table">
+        <thead>
+          <tr>
+            <th style="width:60px; text-align:center">No</th>
+            <th style="width:120px">Tanggal</th>
+            <th>Uraian Transaksi Keuangan</th>
+            <th style="width:140px; text-align:center">Jenis Kas</th>
+            <th style="width:160px; text-align:right">Pemasukan (Rp)</th>
+            <th style="width:160px; text-align:right">Pengeluaran (Rp)</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    fin.items.forEach((item, index) => {
+      const isPemasukan = item.pemasukan > 0;
+      const badgeHtml = isPemasukan 
+        ? `<span class="trans-badge masuk">📥 Pemasukan</span>`
+        : `<span class="trans-badge keluar">📤 Pengeluaran</span>`;
+
+      tableHtml += `
+        <tr>
+          <td style="text-align:center; font-weight:600">${index + 1}</td>
+          <td style="font-weight:600; color:#64748b">${item.tgl}</td>
+          <td style="font-weight:600; color:#0f172a">${escapeHtml(item.uraian)}</td>
+          <td style="text-align:center">${badgeHtml}</td>
+          <td style="text-align:right; font-weight:700; color:${isPemasukan ? '#166534' : '#94a3b8'}">
+            ${item.pemasukan > 0 ? formatRupiah(item.pemasukan) : '-'}
+          </td>
+          <td style="text-align:right; font-weight:700; color:${!isPemasukan ? '#dc2626' : '#94a3b8'}">
+            ${item.pengeluaran > 0 ? formatRupiah(item.pengeluaran) : '-'}
+          </td>
+        </tr>
+      `;
+    });
+
+    tableHtml += `
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td colspan="4" style="text-align:right; font-weight:800; font-size:0.95rem">TOTAL REKAPITULASI DANA:</td>
+            <td style="text-align:right; font-weight:800; color:#166534; font-size:1rem">${formatRupiah(fin.totals.pemasukan)}</td>
+            <td style="text-align:right; font-weight:800; color:#dc2626; font-size:1rem">${formatRupiah(fin.totals.pengeluaran)}</td>
+          </tr>
+          <tr class="saldo-row">
+            <td colspan="4" style="text-align:right; font-weight:800; font-size:1.05rem; color:#004d28">SALDO KAS AKHIR BERSIH:</td>
+            <td colspan="2" style="text-align:right; font-weight:900; color:#006837; font-size:1.15rem">${formatRupiah(fin.totals.saldo)}</td>
+          </tr>
+        </tfoot>
+      </table>
+    `;
+
+    tableContainer.innerHTML = tableHtml;
+  }
+}
+
+// 8. Modal Activity Detail
 function openActivityDetail(id) {
   const act = LPJ_DATA.activities.find(a => a.id === id);
   if (!act) return;
@@ -385,6 +455,11 @@ function formatDateIndo(dateStr) {
   const m = parseInt(parts[1], 10) - 1;
   const d = parseInt(parts[2], 10);
   return `${d} ${months[m] || ''} ${y}`;
+}
+
+function formatRupiah(number) {
+  if (!number && number !== 0) return 'Rp 0';
+  return 'Rp ' + number.toLocaleString('id-ID');
 }
 
 function escapeHtml(str) {

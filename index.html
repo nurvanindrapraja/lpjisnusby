@@ -37,6 +37,7 @@
         <button class="nav-item" data-tab="roadmap-sop">🗺️ Roadmap & SOP</button>
         <button class="nav-item" data-tab="joshnu">📖 JOSHNU</button>
         <button class="nav-item" data-tab="kegiatan">📅 Kegiatan</button>
+        <button class="nav-item" data-tab="keuangan">💰 Lap Keuangan</button>
       </nav>
     </div>
   </header>
@@ -290,6 +291,70 @@
       <!-- Activities Cards Grid -->
       <div class="activities-grid" id="kegiatanGridContainer">
         <!-- Loaded dynamically -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: LAPORAN KEUANGAN ==================== -->
+    <section id="view-keuangan" class="tab-view">
+      <div class="hero-banner">
+        <h2 class="hero-title">Laporan Keuangan PC ISNU Kota Surabaya Periode 2022 - 2026</h2>
+        <p class="hero-subtitle">
+          Rekapitulasi Akuntabilitas Keuangan, Pengelolaan Kas Masuk, Pengeluaran Program Kerja, serta Saldo Kas Akhir Pimpinan Cabang Ikatan Sarjana Nahdlatul Ulama Kota Surabaya.
+        </p>
+      </div>
+
+      <!-- Financial Executive Summary Box -->
+      <div class="keuangan-summary-box">
+        <h3 class="keuangan-summary-title">📌 Ringkasan Eksekutif Pengelolaan Keuangan</h3>
+        <p class="keuangan-summary-text" id="keuanganSummaryText">
+          <!-- Loaded dynamically -->
+        </p>
+
+        <!-- Financial Summary Metrics Cards Grid -->
+        <div class="metrics-grid" style="margin-top:1.5rem; margin-bottom:0">
+          <div class="stat-card">
+            <div class="stat-icon green">📥</div>
+            <div>
+              <div class="stat-number" id="finStatPemasukan">Rp 26.976.000</div>
+              <div class="stat-label">Total Pemasukan Kas</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold" style="background:#fee2e2; color:#dc2626">📤</div>
+            <div>
+              <div class="stat-number" id="finStatPengeluaran">Rp 20.676.000</div>
+              <div class="stat-label">Total Pengeluaran Program</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue">💰</div>
+            <div>
+              <div class="stat-number" id="finStatSaldo">Rp 6.300.000</div>
+              <div class="stat-label">Saldo Kas Akhir</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple">📊</div>
+            <div>
+              <div class="stat-number">76,6%</div>
+              <div class="stat-label">Efisiensi Serapan Khidmah</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Detailed Table Card -->
+      <div class="chart-card" style="margin-top:2rem">
+        <div class="chart-header">
+          <h3 class="chart-title">📑 Rincian Alur Transaksi Kas (Pemasukan & Pengeluaran)</h3>
+          <a href="Source/Laporan_Keuangan_ISNU.docx" download class="btn btn-outline" style="font-size:0.8rem">
+            📥 Unduh File Docx Asli
+          </a>
+        </div>
+
+        <div class="table-responsive-box" id="keuanganTableContainer">
+          <!-- Loaded dynamically from js/app.js -->
+        </div>
       </div>
     </section>
 
