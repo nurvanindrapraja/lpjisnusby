@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LPJ PC ISNU Kota Surabaya Periode 2022 - 2026</title>
+  <meta name="description" content="Website Laporan Pertanggungjawaban (LPJ) Pimpinan Cabang Ikatan Sarjana Nahdlatul Ulama (PC ISNU) Kota Surabaya Masa Khidmat 2022-2026">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="top-header">
+    <div class="header-container">
+      <a href="#" class="brand-logo" onclick="event.preventDefault(); document.querySelector('[data-tab=dashboard]').click();">
+        <img src="Source/Logo/logo_isnu.png" alt="Logo ISNU Kota Surabaya" class="brand-logo-img" />
+        <div class="brand-info">
+          <h1>PC ISNU KOTA SURABAYA</h1>
+          <p>Laporan Pertanggungjawaban (LPJ) Periode 2022 - 2026</p>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">☰</button>
+
+      <nav class="nav-menu" id="navMenu">
+        <button class="nav-item active" data-tab="dashboard">📊 Dashboard</button>
+        <button class="nav-item" data-tab="sk-struktur">📜 SK & Struktur</button>
+        <button class="nav-item" data-tab="roadmap-sop">🗺️ Roadmap & SOP</button>
+        <button class="nav-item" data-tab="joshnu">📖 JOSHNU</button>
+        <button class="nav-item" data-tab="kegiatan">📅 Kegiatan</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-wrapper">
+
+    <!-- ==================== TAB 1: DASHBOARD ==================== -->
+    <section id="view-dashboard" class="tab-view active">
+      <div class="hero-banner">
+        <h2 class="hero-title">Selamat Datang di Website LPJ PC ISNU Kota Surabaya</h2>
+        <p class="hero-subtitle">
+          Laporan Pertanggungjawaban (LPJ) Khidmah Pimpinan Cabang Ikatan Sarjana Nahdlatul Ulama (PC ISNU) Kota Surabaya Masa Khidmat 2022–2026. Halaman ini menyajikan seluruh rekam jejak kegiatan, capaian kinerjanya per seksi, publikasi ilmiah, serta regulasi organisasi secara transparan dan akuntabel.
+        </p>
+      </div>
+
+      <!-- Metric Summary Cards -->
+      <div class="metrics-grid">
+        <div class="stat-card">
+          <div class="stat-icon green">📊</div>
+          <div>
+            <div class="stat-number">53</div>
+            <div class="stat-label">Total Kegiatan</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon gold">🏛️</div>
+          <div>
+            <div class="stat-number">6</div>
+            <div class="stat-label">Seksi Kerja</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue">🎯</div>
+          <div>
+            <div class="stat-number">38</div>
+            <div class="stat-label">Penyelenggara</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">🎤</div>
+          <div>
+            <div class="stat-number">5 / 10</div>
+            <div class="stat-label">Pembicara / Peserta</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Cardviews in 1 Row: Card 1 (Bar Chart), Card 2 (Peran Chart), Card 3 (Daftar Seksi Card) -->
+      <div class="charts-grid-3">
+        <!-- Card 1: Distribusi Kegiatan per Seksi -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">📊 Distribusi Kegiatan per Seksi</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chartSeksi"></canvas>
+          </div>
+        </div>
+
+        <!-- Card 2: Peran ISNU dalam Kegiatan -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">🎯 Peran ISNU dalam Kegiatan</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chartPeran"></canvas>
+          </div>
+        </div>
+
+        <!-- Card 3: Cardview Akses Seksi Bidang (Daftar Seksi) -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">🏛️ Akses Seksi Bidang</h3>
+          </div>
+          <div class="seksi-list-box" id="dashboardSeksiList">
+            <!-- Loaded dynamically from js/charts.js -->
+          </div>
+        </div>
+
+        <!-- Full Width Card: Timeline Tren Kegiatan -->
+        <div class="chart-card full-width">
+          <div class="chart-header">
+            <h3 class="chart-title">📈 Tren Kegiatan Khidmah per Tahun (2022 - 2026)</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chartTimeline"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: SK & STRUKTUR ORGANISASI ==================== -->
+    <section id="view-sk-struktur" class="tab-view">
+      <div class="hero-banner">
+        <h2 class="hero-title">SK & Struktur Organisasi</h2>
+        <p class="hero-subtitle">
+          Dokumen Legalitas Surat Keputusan (SK) dan Bagan Struktur Pengurus PC ISNU Kota Surabaya Masa Khidmat 2022–2026 beserta SK Pengurus Anak Cabang (PAC) Se-Kota Surabaya.
+        </p>
+      </div>
+
+      <!-- Section Title for SK -->
+      <h3 style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; color:#004d28; margin-bottom:1rem;">
+        📜 Daftar Surat Keputusan (SK) Resmi
+      </h3>
+
+      <div class="sk-grid" id="skGridContainer">
+        <!-- Loaded dynamically from js/app.js -->
+      </div>
+
+      <!-- Section Title for Structure -->
+      <h3 style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; color:#004d28; margin-top:3rem; margin-bottom:1rem;">
+        🏛️ Bagan Struktur Organisasi PC ISNU Kota Surabaya 2022 - 2026
+      </h3>
+
+      <div class="image-viewer-box">
+        <img src="Source/Struktur Organisasi/struktur ISNU Kota Surabaya 2022 - 2026.jpg" alt="Struktur Organisasi PC ISNU Kota Surabaya" onclick="openLightbox('Source/Struktur Organisasi/struktur ISNU Kota Surabaya 2022 - 2026.jpg')" />
+        <p style="font-size:0.85rem; color:#64748b; margin-top:0.75rem;">🔍 Klik gambar untuk memperbesar (Full HD Zoom)</p>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: ROADMAP & SOP ==================== -->
+    <section id="view-roadmap-sop" class="tab-view">
+      <div class="hero-banner">
+        <h2 class="hero-title">Roadmap & Standard Operating Procedure (SOP)</h2>
+        <p class="hero-subtitle">
+          Panduan Rencana Strategis (Renstra) PC ISNU Kota Surabaya sampai Indonesia Emas 2045 serta Dokumen Standar Operasional Prosedur (SOP) Kesekretariatan, Kebendaharaan, dan Aset.
+        </p>
+      </div>
+
+      <!-- Roadmap Section -->
+      <div class="joshnu-container" style="margin-bottom:3rem">
+        <div>
+          <span class="doc-badge">Rencana Strategis</span>
+          <h3 style="font-size:1.4rem; font-weight:800; color:#004d28; margin-bottom:0.75rem">
+            Roadmap ISNU Surabaya 2022–2026 menuju Indonesia Emas 2045
+          </h3>
+          <p style="font-size:0.95rem; color:#475569; line-height:1.7; margin-bottom:1.5rem">
+            Roadmap ini meletakkan pondasi bagi transformasi sarjana Nahdliyin Kota Surabaya dalam pengembangan sains & teknologi, kemandirian ekonomi syariah, riset publikasi bereputasi, serta penguatan ideologi kebangsaan.
+          </p>
+          <a href="Source/Roadmap/Roadmap dan Reinstra ISNU Surabaya 2022-2026 sampai Indonesia Emas 2045.pdf" target="_blank" class="btn btn-primary">
+            📄 Unduh Dokumen Roadmap & Renstra (PDF)
+          </a>
+        </div>
+
+        <div>
+          <h4 style="font-size:1.1rem; font-weight:700; color:#004d28; margin-bottom:1rem">📌 4 Pilar Utama Strategi Khidmah:</h4>
+          <div class="joshnu-scopes" id="roadmapPillars">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SOP Section -->
+      <h3 style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; color:#004d28; margin-bottom:1rem;">
+        📋 Daftar Standard Operating Procedure (SOP) Ber-TTD Resmi
+      </h3>
+
+      <div class="sop-grid" id="sopGridContainer">
+        <!-- Loaded dynamically -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: JOSHNU ==================== -->
+    <section id="view-joshnu" class="tab-view">
+      <div class="hero-banner">
+        <h2 class="hero-title">JOSHNU (Journal of Sustainable Halal Industry and New Urbanism)</h2>
+        <p class="hero-subtitle">
+          Jurnal Akademis Terdepan PC ISNU Kota Surabaya yang mengeksplorasi hubungan antara industri halal berkelanjutan dan prinsip urbanisme baru di era Society 5.0.
+        </p>
+      </div>
+
+      <div class="joshnu-container">
+        <div>
+          <div class="image-viewer-box" style="margin-top:0">
+            <img src="Source/JOSHNU/ttg JOSHNU.jpg" alt="Tentang JOSHNU" onclick="openLightbox('Source/JOSHNU/ttg JOSHNU.jpg')" />
+          </div>
+        </div>
+
+        <div>
+          <span class="doc-badge">Jurnal Publikasi Ilmiah Resmi</span>
+          <h3 style="font-size:1.5rem; font-weight:800; color:#004d28; margin-bottom:0.5rem">
+            Journal of Sustainable Halal Industry and New Urbanism (JOSHNU)
+          </h3>
+          <p style="font-size:0.9rem; font-weight:600; color:#d97706; margin-bottom:1rem">
+            Edisi Rilis Perdana: Vol. 1 Tahun 2025
+          </p>
+          <p style="font-size:0.95rem; color:#334155; line-height:1.7; margin-bottom:1.5rem">
+            JOSHNU menawarkan platform interdisipliner bagi para peneliti, akademisi, dan praktisi untuk menerbitkan artikel ilmiah berfokus pada pengembangan industri halal dan tata kota berkelanjutan (urbanism) yang inklusif dan berorientasi komunitas.
+          </p>
+
+          <h4 style="font-size:1.1rem; font-weight:700; color:#004d28; margin-bottom:1rem">💡 6 Rumpun Fokus Utama JOSHNU:</h4>
+          <div class="joshnu-scopes" id="joshnuScopesGrid">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: KEGIATAN ==================== -->
+    <section id="view-kegiatan" class="tab-view">
+      <div class="hero-banner">
+        <h2 class="hero-title">Daftar Kegiatan PC ISNU Kota Surabaya</h2>
+        <p class="hero-subtitle">
+          Rekapitulasi 53 kegiatan khidmah PC ISNU Kota Surabaya Periode 2022–2026 yang terbagi ke dalam 6 Seksi Bidang Kerja beserta uraian Output, Outcome, dan Foto Dokumentasinya.
+        </p>
+      </div>
+
+      <!-- Sub-nav Seksi Tabs -->
+      <div class="seksi-tabs-wrapper">
+        <button class="seksi-tab-btn active" data-seksi="ALL">🌟 Semua Kegiatan (53)</button>
+        <button class="seksi-tab-btn" data-seksi="SEKSI ORGANISASI DAN KERJASAMA ANTAR LEMBAGA">🤝 Organisasi & Kerjasama</button>
+        <button class="seksi-tab-btn" data-seksi="SEKSI PEREKONOMIAN DAN PEMBERDAYAAN UMAT">💰 Perekonomian & Umat</button>
+        <button class="seksi-tab-btn" data-seksi="SEKSI KESEHATAN MASYARAKAT DAN LINGKUNGAN HIDUP">🏥 Kesehatan & Lingkungan</button>
+        <button class="seksi-tab-btn" data-seksi="SEKSI SAINS DAN TEKNOLOGI (SAINTEK)">💻 Sains & Teknologi</button>
+        <button class="seksi-tab-btn" data-seksi="SEKSI PENDIDIKAN DAN HUMANIORA">🎓 Pendidikan & Humaniora</button>
+        <button class="seksi-tab-btn" data-seksi="SEKSI PENGUATAN IDEOLOGI DAN DAKWAH DIGITAL">📱 Ideologi & Dakwah Digital</button>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="search-input-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchKegiatan" placeholder="Cari nama kegiatan, lokasi, atau kata kunci output..." />
+        </div>
+
+        <div class="filter-selects">
+          <select id="filterRole">
+            <option value="ALL">Semua Peran ISNU</option>
+            <option value="Penyelenggara">Penyelenggara</option>
+            <option value="Pembicara">Pembicara</option>
+            <option value="Peserta">Peserta</option>
+          </select>
+
+          <select id="filterYear">
+            <option value="ALL">Semua Tahun (2022-2026)</option>
+            <option value="2022">Tahun 2022</option>
+            <option value="2023">Tahun 2023</option>
+            <option value="2024">Tahun 2024</option>
+            <option value="2025">Tahun 2025</option>
+            <option value="2026">Tahun 2026</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Counter -->
+      <p id="kegiatanCounter" style="font-size:0.9rem; font-weight:700; color:#006837; margin-bottom:1rem;">
+        Menampilkan 53 Kegiatan
+      </p>
+
+      <!-- Activities Cards Grid -->
+      <div class="activities-grid" id="kegiatanGridContainer">
+        <!-- Loaded dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+  <!-- Activity Detail Modal -->
+  <div class="modal-overlay" id="activityModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Detail Laporan Kegiatan</h3>
+        <button class="modal-close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBodyContent">
+        <!-- Loaded dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Zoom Modal -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Full Zoom Preview" />
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>PC ISNU KOTA SURABAYA</h3>
+        <p>Pimpinan Cabang Ikatan Sarjana Nahdlatul Ulama Kota Surabaya</p>
+        <p style="font-size:0.85rem; opacity:0.8; margin-top:0.5rem">Masa Khidmat 2022 – 2026</p>
+      </div>
+
+      <div>
+        <h4 class="footer-section-title">Kesekretariatan</h4>
+        <ul class="footer-info-list">
+          <li>📍 Jl. Bubutan Gg. VI No.2, Alun-alun Contong, Kecamatan Bubutan, Kota Surabaya, Jawa Timur 60235</li>
+          <li>📞 No HP: <a href="https://wa.me/6281330278721" target="_blank" rel="noopener noreferrer" class="footer-link">081330278721</a></li>
+          <li>✉️ Email: <a href="mailto:isnukotasurabaya@gmail.com" class="footer-link">isnukotasurabaya@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-section-title">Media & Portal</h4>
+        <ul class="footer-info-list">
+          <li>🌐 Website: <a href="https://isnusurabaya.or.id" target="_blank" rel="noopener noreferrer" class="footer-link">https://isnusurabaya.or.id</a></li>
+          <li>📸 Instagram: <a href="https://instagram.com/isnusurabaya" target="_blank" rel="noopener noreferrer" class="footer-link">@isnusurabaya</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 PC ISNU Kota Surabaya. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

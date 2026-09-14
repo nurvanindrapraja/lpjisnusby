@@ -1,0 +1,7 @@
+.DS_Store
+*.tmp
+__pycache__/
+ocr_tool
+ocr_tool.swift
+process_excel.py
+build_data.py
