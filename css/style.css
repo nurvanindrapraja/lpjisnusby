@@ -49,7 +49,7 @@ body {
 .top-header {
   background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-nu) 100%);
   color: var(--text-inverse);
-  padding: 1rem 2rem;
+  padding: 0.65rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -68,32 +68,34 @@ body {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   text-decoration: none;
   color: inherit;
 }
 
 .brand-logo-img {
-  height: 48px;
+  height: 40px;
   width: auto;
-  max-width: 180px;
+  max-width: 160px;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .brand-info h1 {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.1rem;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .brand-info p {
-  font-size: 0.825rem;
+  font-size: 0.75rem;
   opacity: 0.9;
   color: #e2e8f0;
+  white-space: nowrap;
 }
 
 .mobile-toggle {
@@ -109,23 +111,24 @@ body {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .nav-item {
-  padding: 0.55rem 1.1rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 9999px;
   background: #ffffff;
   color: #334155; /* Abu-abu gelap agar selalu terbaca jelas! */
-  font-size: 0.875rem;
+  font-size: 0.785rem;
   font-weight: 700;
   cursor: pointer;
   transition: var(--transition);
   border: 1px solid #cbd5e1;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
 }
 
 .nav-item:hover {
@@ -220,16 +223,17 @@ body {
   background: #d97706;
   color: #ffffff;
   font-weight: 700;
-  font-size: 0.85rem;
-  padding: 0.45rem 0.9rem;
+  font-size: 0.785rem;
+  padding: 0.4rem 0.75rem;
   border-radius: var(--radius-md);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
   transition: var(--transition);
   border: 1px solid #b45309;
-  margin-left: 0.25rem;
+  margin-left: 0.15rem;
+  white-space: nowrap;
 }
 
 .btn-pdf-nav:hover {
@@ -431,6 +435,16 @@ body {
 @media (max-width: 1200px) {
   .charts-grid-3 {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .brand-info p {
+    display: none;
+  }
+
+  .nav-item,
+  .btn-pdf-nav {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
   }
 }
 
