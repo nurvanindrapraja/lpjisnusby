@@ -1219,8 +1219,8 @@ const LPJ_DATA = {
   "photos": [
     {
       "path": "Source/PWNU Award/Bashri NU Award.jpg",
-      "title": "Ketua PC ISNU Surabaya Ahmad Bashri",
-      "desc": "Ketua PC ISNU Surabaya Ahmad Bashri menerima penghargaan pada malam anugerah PWNU Jatim Award 2023."
+      "title": "Menerima Penghargaan dari Gubernur Jatim",
+      "desc": "Ketua PC ISNU Surabaya, Ahmad Bashri menerima penghargaan pada malam anugerah PWNU Jatim Award 2023 yang diserahkan oleh Gubernur Jatim"
     },
     {
       "path": "Source/PWNU Award/piala NU Award.jpg",
@@ -1229,23 +1229,23 @@ const LPJ_DATA = {
     },
     {
       "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 18.31.57.jpg",
-      "title": "Prosesi Penyerahan Penghargaan",
-      "desc": "Dokumentasi penyerahan piala dan piagam penghargaan di Kediri."
+      "title": "Proses Penilaian oleh Tim Penilai PWNU Award",
+      "desc": "Proses penilaian dilaksanakan secara terbuka oleh tim penilai di kantor PCNU Kota Surabaya"
     },
     {
       "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 18.31.58.jpg",
-      "title": "Foto Bersama Pengurus PC ISNU Surabaya",
-      "desc": "Kebersamaan pengurus PC ISNU Kota Surabaya pada ajang PWNU Award."
+      "title": "Presentasi Penilaian dan Wawancara",
+      "desc": "Presentasi dan wawancara dilakukan untuk mengkonfirmasi dokumen yang telah diterima Tim Penilai sebelumnya"
     },
     {
       "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 19.39.26.jpg",
-      "title": "Pemberian Piagam PWNU Jatim Award",
-      "desc": "Momen penyerahan piagam penghargaan PWNU Award."
+      "title": "Foto Bersama Pengurus ISNU Surabaya bersama Tim Penilai",
+      "desc": "Dilakukan setelah proses penilaian di kantor PCNU Kota Surabaya"
     },
     {
       "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 19.49.45.jpg",
-      "title": "Dokumentasi Syukuran Capaian PWNU Award",
-      "desc": "Apresiasi dan rasa syukur bersama jajaran pengurus PC ISNU Kota Surabaya."
+      "title": "Foto Bersama di Bawah Panji NU",
+      "desc": "Foto bersama di ruang tamu kantor PCNU Kota Surabaya"
     }
   ],
   "relatedLinks": [
