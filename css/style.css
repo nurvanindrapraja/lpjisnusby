@@ -190,6 +190,55 @@ body {
   pointer-events: none;
 }
 
+.hero-banner-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-banner-content > div:first-child {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-pdf-action {
+  flex-shrink: 0;
+}
+
+.hero-pdf-btn {
+  font-size: 0.95rem !important;
+  padding: 0.85rem 1.4rem !important;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+}
+
+.btn-pdf-nav {
+  background: #d97706;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition);
+  border: 1px solid #b45309;
+  margin-left: 0.25rem;
+}
+
+.btn-pdf-nav:hover {
+  background: #b45309;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+}
+
 .hero-title {
   font-family: 'Outfit', sans-serif;
   font-size: 2rem;
@@ -1167,6 +1216,26 @@ footer {
     width: 100%;
     border-radius: var(--radius-sm);
     justify-content: center;
+  }
+
+  .btn-pdf-nav {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0.5rem;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .hero-pdf-action {
+    width: 100%;
+  }
+
+  .hero-pdf-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 0.75rem 1rem !important;
   }
 
   .main-wrapper {
