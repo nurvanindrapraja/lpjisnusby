@@ -54,13 +54,44 @@ class NumberedCanvas(canvas.Canvas):
         
         self.restoreState()
 
-def generate_pdf_charts():
+def compute_seksi_counts_from_excel():
+    wb = openpyxl.load_workbook('Daftar Kegiatan ISNU Kota Surabaya 2022 - 2026.xlsx', data_only=True)
+    sheet = wb.active
+    seksi_keys = [
+        'ORGANISASI DAN KERJASAMA ANTAR LEMBAGA',
+        'PEREKONOMIAN DAN PEMBERDAYAAN UMAT',
+        'KESEHATAN MASYARAKAT DAN LINGKUNGAN HIDUP',
+        'SAINS DAN TEKNOLOGI (SAINTEK)',
+        'PENDIDIKAN DAN HUMANIORA',
+        'PENGUATAN IDEOLOGI DAN DAKWAH DIGITAL'
+    ]
+    counts = {k: 0 for k in seksi_keys}
+    for r in range(2, 55):
+        s1 = sheet.cell(row=r, column=6).value or ''
+        s2 = sheet.cell(row=r, column=7).value or ''
+        for s in [s1, s2]:
+            if not s:
+                continue
+            clean = str(s).strip().upper()
+            if clean.startswith('SEKSI '):
+                clean = clean.replace('SEKSI ', '').strip()
+            if clean in counts:
+                counts[clean] += 1
+            else:
+                for k in seksi_keys:
+                    if clean in k or k in clean:
+                        counts[k] += 1
+                        break
+    return counts
+
+def generate_pdf_charts(seksi_counts):
     os.makedirs("Source", exist_ok=True)
     chart_paths = {}
     
-    # 1. Seksi Bar Chart (Horizontal)
+    # 1. Seksi Bar Chart (Horizontal) - Matching website counts (both Seksi 1 & Seksi 2)
     fig, ax = plt.subplots(figsize=(5.5, 3.2), dpi=200)
-    seksi_labels = [
+    
+    seksi_labels_display = [
         'Ideologi & Dakwah',
         'Pendidikan & Hum.',
         'Sains & Tekn. (Saintek)',
@@ -68,12 +99,21 @@ def generate_pdf_charts():
         'Perekonomian & Umat',
         'Organisasi & Kerjasama'
     ]
-    seksi_values = [8, 9, 9, 8, 9, 10]
+    
+    seksi_values = [
+        seksi_counts.get('PENGUATAN IDEOLOGI DAN DAKWAH DIGITAL', 11),
+        seksi_counts.get('PENDIDIKAN DAN HUMANIORA', 16),
+        seksi_counts.get('SAINS DAN TEKNOLOGI (SAINTEK)', 6),
+        seksi_counts.get('KESEHATAN MASYARAKAT DAN LINGKUNGAN HIDUP', 6),
+        seksi_counts.get('PEREKONOMIAN DAN PEMBERDAYAAN UMAT', 7),
+        seksi_counts.get('ORGANISASI DAN KERJASAMA ANTAR LEMBAGA', 19)
+    ]
+    
     bar_colors = ['#e11d48', '#d97706', '#7c3aed', '#0284c7', '#059669', '#006837']
     
-    bars = ax.barh(seksi_labels, seksi_values, color=bar_colors, height=0.6, edgecolor='none')
+    bars = ax.barh(seksi_labels_display, seksi_values, color=bar_colors, height=0.6, edgecolor='none')
     ax.set_title('Kegiatan per Seksi Bidang Kerja', fontsize=10, fontweight='bold', color='#004d28', pad=8)
-    ax.set_xlim(0, 12)
+    ax.set_xlim(0, 22)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_color('#cbd5e1')
@@ -84,7 +124,7 @@ def generate_pdf_charts():
     
     for bar in bars:
         width = bar.get_width()
-        ax.text(width + 0.3, bar.get_y() + bar.get_height()/2, f'{int(width)}',
+        ax.text(width + 0.4, bar.get_y() + bar.get_height()/2, f'{int(width)}',
                 va='center', ha='left', fontsize=8, fontweight='bold', color='#0f172a')
                 
     plt.tight_layout()
@@ -149,8 +189,8 @@ def build_pdf():
     pdf_filename = "Source/Dokumen_LPJ_PC_ISNU_Kota_Surabaya_2022-2026.pdf"
     os.makedirs("Source", exist_ok=True)
     
-    # Generate charts
-    chart_paths = generate_pdf_charts()
+    seksi_counts = compute_seksi_counts_from_excel()
+    chart_paths = generate_pdf_charts(seksi_counts)
 
     doc = SimpleDocTemplate(
         pdf_filename,
@@ -163,14 +203,12 @@ def build_pdf():
 
     styles = getSampleStyleSheet()
     
-    # Custom Palette
     c_primary = colors.HexColor("#006837")
     c_dark = colors.HexColor("#004d28")
     c_gold = colors.HexColor("#b45309")
     c_text = colors.HexColor("#1e293b")
     c_bg_light = colors.HexColor("#f0fdf4")
     
-    # Custom Paragraph Styles
     style_cover_title = ParagraphStyle(
         'CoverTitle',
         parent=styles['Normal'],
@@ -178,7 +216,7 @@ def build_pdf():
         fontSize=20,
         leading=24,
         textColor=c_primary,
-        alignment=1, # Center
+        alignment=1,
         spaceAfter=8
     )
     
@@ -325,16 +363,23 @@ def build_pdf():
     story.append(img_timeline)
     story.append(Spacer(1, 12))
 
-    # Seksi Distribution Summary Table
+    # Seksi Distribution Summary Table (Matched 100% with website Seksi 1 & Seksi 2 counts)
+    c_org = seksi_counts.get('ORGANISASI DAN KERJASAMA ANTAR LEMBAGA', 19)
+    c_pend = seksi_counts.get('PENDIDIKAN DAN HUMANIORA', 16)
+    c_ideo = seksi_counts.get('PENGUATAN IDEOLOGI DAN DAKWAH DIGITAL', 11)
+    c_eko = seksi_counts.get('PEREKONOMIAN DAN PEMBERDAYAAN UMAT', 7)
+    c_kes = seksi_counts.get('KESEHATAN MASYARAKAT DAN LINGKUNGAN HIDUP', 6)
+    c_sain = seksi_counts.get('SAINS DAN TEKNOLOGI (SAINTEK)', 6)
+
     seksi_summary = [
-        [Paragraph("Seksi Bidang Kerja", style_table_cell_header), Paragraph("Jumlah Kegiatan Khidmah", style_table_cell_header)],
-        [Paragraph("1. Seksi Organisasi & Kerjasama Antar Lembaga", style_table_cell), Paragraph("10 Kegiatan", style_table_cell_bold)],
-        [Paragraph("2. Seksi Perekonomian & Pemberdayaan Umat", style_table_cell), Paragraph("9 Kegiatan", style_table_cell_bold)],
-        [Paragraph("3. Seksi Kesehatan Masyarakat & Lingkungan Hidup", style_table_cell), Paragraph("8 Kegiatan", style_table_cell_bold)],
-        [Paragraph("4. Seksi Sains & Teknologi (SAINTEK)", style_table_cell), Paragraph("9 Kegiatan", style_table_cell_bold)],
-        [Paragraph("5. Seksi Pendidikan & Humaniora", style_table_cell), Paragraph("9 Kegiatan", style_table_cell_bold)],
-        [Paragraph("6. Seksi Penguatan Ideologi & Dakwah Digital", style_table_cell), Paragraph("8 Kegiatan", style_table_cell_bold)],
-        [Paragraph("<b>TOTAL REKAPITULASI KEGIATAN</b>", style_table_cell), Paragraph("<b>53 KEGIATAN</b>", style_table_cell_bold)]
+        [Paragraph("Seksi Bidang Kerja", style_table_cell_header), Paragraph("Jumlah Keterlibatan Kegiatan", style_table_cell_header)],
+        [Paragraph("1. Seksi Organisasi & Kerjasama Antar Lembaga", style_table_cell), Paragraph(f"{c_org} Kegiatan", style_table_cell_bold)],
+        [Paragraph("2. Seksi Pendidikan & Humaniora", style_table_cell), Paragraph(f"{c_pend} Kegiatan", style_table_cell_bold)],
+        [Paragraph("3. Seksi Penguatan Ideologi & Dakwah Digital", style_table_cell), Paragraph(f"{c_ideo} Kegiatan", style_table_cell_bold)],
+        [Paragraph("4. Seksi Perekonomian & Pemberdayaan Umat", style_table_cell), Paragraph(f"{c_eko} Kegiatan", style_table_cell_bold)],
+        [Paragraph("5. Seksi Kesehatan Masyarakat & Lingkungan Hidup", style_table_cell), Paragraph(f"{c_kes} Kegiatan", style_table_cell_bold)],
+        [Paragraph("6. Seksi Sains & Teknologi (SAINTEK)", style_table_cell), Paragraph(f"{c_sain} Kegiatan", style_table_cell_bold)],
+        [Paragraph("<b>TOTAL REKAPITULASI PROGRAM (SEKSI 1 & SEKSI 2)</b>", style_table_cell), Paragraph("<b>53 KEGIATAN UTAMA</b>", style_table_cell_bold)]
     ]
     t_seksi = Table(seksi_summary, colWidths=[380, 143])
     t_seksi.setStyle(TableStyle([
@@ -436,11 +481,16 @@ def build_pdf():
         lokasi = sheet.cell(row=r, column=4).value or 'Surabaya'
         peran = sheet.cell(row=r, column=5).value or 'Penyelenggara'
         seksi1 = sheet.cell(row=r, column=6).value or ''
+        seksi2 = sheet.cell(row=r, column=7).value or ''
         output = sheet.cell(row=r, column=8).value or '-'
         outcome = sheet.cell(row=r, column=9).value or '-'
 
+        seksi_str = seksi1
+        if seksi2:
+            seksi_str += f"<br/>{seksi2}"
+
         c_info = f"<b>{kegiatan}</b><br/><font color='#64748b'>📅 {tgl_str} | 📍 {lokasi}</font>"
-        c_peran = f"<b>{peran}</b><br/><font color='#006837'>{seksi1}</font>"
+        c_peran = f"<b>{peran}</b><br/><font color='#006837'>{seksi_str}</font>"
         c_out = f"<b>Output:</b> {output}<br/><b>Outcome:</b> {outcome}"
 
         act_table_data.append([
@@ -520,7 +570,7 @@ def build_pdf():
 
     # Build document
     doc.build(story, canvasmaker=NumberedCanvas)
-    print(f"PDF generated with embedded charts successfully: {pdf_filename}")
+    print(f"PDF generated with exact dynamic seksi counts matching website: {pdf_filename}")
 
 if __name__ == "__main__":
     build_pdf()
