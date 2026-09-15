@@ -45,13 +45,15 @@ body {
   line-height: 1.6;
 }
 
-/* Header & Top Bar */
+/* Header & Top Bar (Fixed Static Header on Scroll) */
 .top-header {
   background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-nu) 100%);
   color: var(--text-inverse);
   padding: 0.65rem 1.5rem;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 77, 40, 0.25);
   width: 100%;
@@ -147,8 +149,8 @@ body {
 /* Main Layout Container */
 .main-wrapper {
   max-width: 1400px;
-  margin: 2rem auto;
-  padding: 0 1.5rem;
+  margin: 0 auto 2rem;
+  padding: 5.5rem 1.5rem 0;
   min-height: calc(100vh - 200px);
   width: 100%;
 }
@@ -1253,8 +1255,8 @@ footer {
   }
 
   .main-wrapper {
-    padding: 0 0.75rem;
-    margin: 1rem auto;
+    padding: 4.5rem 0.75rem 0;
+    margin: 0 auto 1rem;
   }
 
   .hero-banner {
