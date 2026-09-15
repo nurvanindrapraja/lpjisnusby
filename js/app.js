@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDashboard();
   initSKandStructure();
   initRoadmapAndSOP();
+  initNUAward();
   initJOSHNU();
   initKegiatanSection();
   initKeuanganSection();
@@ -128,6 +129,43 @@ function initRoadmapAndSOP() {
           </a>
         </div>
       </div>
+    `).join('');
+  }
+}
+
+// 5. PWNU Jatim Award Init
+function initNUAward() {
+  const galleryGrid = document.getElementById('nuAwardGallery');
+  if (galleryGrid && LPJ_DATA.nuAward && LPJ_DATA.nuAward.photos) {
+    galleryGrid.innerHTML = LPJ_DATA.nuAward.photos.map(p => `
+      <div class="award-photo-card" onclick="openLightbox('${p.path}')">
+        <div class="award-photo-wrapper">
+          <img src="${p.path}" alt="${escapeHtml(p.title)}" loading="lazy" />
+          <div class="photo-overlay">
+            <span>🔍 Perbesar Foto</span>
+          </div>
+        </div>
+        <div class="award-photo-caption">
+          <h4>${escapeHtml(p.title)}</h4>
+          <p>${escapeHtml(p.desc)}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const linksGrid = document.getElementById('nuAwardLinks');
+  if (linksGrid && LPJ_DATA.nuAward && LPJ_DATA.nuAward.relatedLinks) {
+    linksGrid.innerHTML = LPJ_DATA.nuAward.relatedLinks.map(link => `
+      <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="award-link-card">
+        <div class="link-icon">
+          ${link.type === 'video' ? '📺' : (link.type === 'article' ? '🌐' : '📰')}
+        </div>
+        <div class="link-details">
+          <span class="link-source">${escapeHtml(link.source)}</span>
+          <h4 class="link-title">${escapeHtml(link.title)}</h4>
+          <span class="link-url">${escapeHtml(link.url)} ↗</span>
+        </div>
+      </a>
     `).join('');
   }
 }

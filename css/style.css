@@ -1356,3 +1356,301 @@ footer {
     justify-content: center;
   }
 }
+
+/* PWNU Award Section Styles */
+.nu-award-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+}
+
+.award-header-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #006837 0%, #004d28 100%);
+  color: #ffffff;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  width: fit-content;
+  margin-bottom: 1.25rem;
+}
+
+.award-main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  line-height: 1.35;
+  margin-bottom: 1.5rem;
+}
+
+.award-quote-box {
+  position: relative;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-left: 5px solid #006837;
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.quote-icon {
+  font-family: Georgia, serif;
+  font-size: 4rem;
+  color: #bbf7d0;
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quote-text {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #0f172a;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1rem;
+}
+
+.quote-author strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #004d28;
+}
+
+.quote-author span {
+  font-size: 0.8rem;
+  color: #15803d;
+  font-weight: 600;
+}
+
+.award-body-text {
+  font-size: 1rem;
+  color: #334155;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.award-body-text p {
+  margin-bottom: 1rem;
+}
+
+.award-gallery-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.award-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.award-photo-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.award-photo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+
+.award-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.award-photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.award-photo-card:hover .award-photo-wrapper img {
+  transform: scale(1.06);
+}
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 77, 40, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.award-photo-card:hover .photo-overlay {
+  opacity: 1;
+}
+
+.award-photo-caption {
+  padding: 1rem 1.25rem;
+}
+
+.award-photo-caption h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+  line-height: 1.35;
+}
+
+.award-photo-caption p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* Related Links Section */
+.award-links-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+
+.award-links-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 1.25rem;
+}
+
+.award-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.award-link-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.award-link-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-nu);
+  box-shadow: var(--shadow-md);
+}
+
+.link-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.link-details {
+  min-width: 0;
+  flex: 1;
+}
+
+.link-source {
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary-nu);
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.link-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.award-link-card:hover .link-title {
+  color: var(--primary-nu);
+}
+
+.link-url {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .nu-award-card {
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .award-main-title {
+    font-size: 1.3rem;
+  }
+
+  .award-quote-box {
+    padding: 1.15rem 1.25rem;
+  }
+
+  .quote-text {
+    font-size: 0.95rem;
+  }
+
+  .award-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .award-photo-wrapper {
+    height: 190px;
+  }
+
+  .award-links-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .link-title {
+    white-space: normal;
+  }
+}

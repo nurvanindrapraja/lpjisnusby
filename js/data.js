@@ -1202,5 +1202,71 @@ const LPJ_DATA = {
       "pengeluaran": 17176000
     }
   ]
+},
+  nuAward: {
+  "title": "PC ISNU Surabaya Raih Juara 2 Kategori Banom NU Surabaya Dalam PWNU Jatim Award 2023",
+  "location": "Kediri, Maret 2023",
+  "summary": "Pengurus Cabang Ikatan Sarjana Nahdlatul Ulama (PC ISNU) Kota Surabaya berhasil meraih Juara 2 dalam kategori Badan Otonom (Banom) NU Surabaya pada ajang PWNU Jatim Award 2023.",
+  "quote": {
+    "speaker": "Ahmad Bashri",
+    "title": "Ketua PC ISNU Kota Surabaya",
+    "text": "Sangat bersyukur atas penghargaan dalam ajang PWNU Award. Capaian ini bukan hasil kerja individu, namun kerja bersama semua pengurus dalam beberapa tahun terakhir. Semoga menjadi awal untuk terus berkhidmat di ISNU dalam memberikan manfaat lebih besar untuk warga Surabaya, khususnya warga nahdliyyin."
+  },
+  "content": [
+    "Lebih lanjut, beliau mengungkapkan hal yang menjadikan PC ISNU Surabaya memperoleh Juara 2 yaitu inovasi-inovasi program. Inovasi program yang dilaksanakan oleh ISNU Surabaya tidak semata rutinitas, namun berbagai kolaborasi lokal, nasional, dan internasional.",
+    "Bashri berharap PC ISNU Surabaya kedepannya dapat terus meningkatkan kontribusi melalui program-program inovatif yang membumi bersama para stakeholder di Kota Surabaya. Ajang PWNU Award bukan tujuan utama, apalagi hanya disikapi formalitas saat visitasi. Hasilnya pasti tidak jauh berbeda sesuai karya dan khidmah nyata seluruh pengurus ISNU di bidangnya masing-masing."
+  ],
+  "photos": [
+    {
+      "path": "Source/PWNU Award/Bashri NU Award.jpg",
+      "title": "Ketua PC ISNU Surabaya Ahmad Bashri",
+      "desc": "Ketua PC ISNU Surabaya Ahmad Bashri menerima penghargaan pada malam anugerah PWNU Jatim Award 2023."
+    },
+    {
+      "path": "Source/PWNU Award/piala NU Award.jpg",
+      "title": "Trophy & Piagam Juara 2 PWNU Jatim Award 2023",
+      "desc": "Trophy dan Piagam Penghargaan Juara 2 Kategori Banom NU Surabaya."
+    },
+    {
+      "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 18.31.57.jpg",
+      "title": "Prosesi Penyerahan Penghargaan",
+      "desc": "Dokumentasi penyerahan piala dan piagam penghargaan di Kediri."
+    },
+    {
+      "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 18.31.58.jpg",
+      "title": "Foto Bersama Pengurus PC ISNU Surabaya",
+      "desc": "Kebersamaan pengurus PC ISNU Kota Surabaya pada ajang PWNU Award."
+    },
+    {
+      "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 19.39.26.jpg",
+      "title": "Pemberian Piagam PWNU Jatim Award",
+      "desc": "Momen penyerahan piagam penghargaan PWNU Award."
+    },
+    {
+      "path": "Source/PWNU Award/WhatsApp Image 2022-12-08 at 19.49.45.jpg",
+      "title": "Dokumentasi Syukuran Capaian PWNU Award",
+      "desc": "Apresiasi dan rasa syukur bersama jajaran pengurus PC ISNU Kota Surabaya."
+    }
+  ],
+  "relatedLinks": [
+    {
+      "title": "PC ISNU Surabaya Raih Juara 2 Kategori Banom NU Surabaya Dalam NU Award PWNU Jatim",
+      "source": "Website Resmi ISNU Surabaya",
+      "url": "https://www.isnusurabaya.or.id/2023/03/pc-isnu-surabaya-raih-juara-2-kategori.html",
+      "type": "article"
+    },
+    {
+      "title": "Anugerah PWNU Jatim Award 2023: PC ISNU Raih Juara 2 Kategori Banom NU Surabaya",
+      "source": "Portal Berita Ikilhojatim.com",
+      "url": "https://ikilhojatim.com/anugerah-pwnu-jatim-award-2023-pc-isnu-raih-juara-2-kategori-banom-nu-surabaya/",
+      "type": "news"
+    },
+    {
+      "title": "Siaran Ulang Malam Anugerah PWNU Jatim Award 2023",
+      "source": "Official YouTube Channel",
+      "url": "https://www.youtube.com/watch?v=3vilgX7lprA",
+      "type": "video"
+    }
+  ]
 }
 };
