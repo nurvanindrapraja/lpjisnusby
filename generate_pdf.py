@@ -1,11 +1,15 @@
 import os
 import json
 import openpyxl
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable, Image
 )
 from reportlab.pdfgen import canvas
 
@@ -50,10 +54,104 @@ class NumberedCanvas(canvas.Canvas):
         
         self.restoreState()
 
+def generate_pdf_charts():
+    os.makedirs("Source", exist_ok=True)
+    chart_paths = {}
+    
+    # 1. Seksi Bar Chart (Horizontal)
+    fig, ax = plt.subplots(figsize=(5.5, 3.2), dpi=200)
+    seksi_labels = [
+        'Ideologi & Dakwah',
+        'Pendidikan & Hum.',
+        'Sains & Tekn. (Saintek)',
+        'Kesehatan & Lingk.',
+        'Perekonomian & Umat',
+        'Organisasi & Kerjasama'
+    ]
+    seksi_values = [8, 9, 9, 8, 9, 10]
+    bar_colors = ['#e11d48', '#d97706', '#7c3aed', '#0284c7', '#059669', '#006837']
+    
+    bars = ax.barh(seksi_labels, seksi_values, color=bar_colors, height=0.6, edgecolor='none')
+    ax.set_title('Kegiatan per Seksi Bidang Kerja', fontsize=10, fontweight='bold', color='#004d28', pad=8)
+    ax.set_xlim(0, 12)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color('#cbd5e1')
+    ax.spines['left'].set_color('#cbd5e1')
+    ax.xaxis.grid(True, linestyle='--', alpha=0.5, color='#e2e8f0')
+    ax.set_axisbelow(True)
+    ax.tick_params(axis='both', labelsize=8)
+    
+    for bar in bars:
+        width = bar.get_width()
+        ax.text(width + 0.3, bar.get_y() + bar.get_height()/2, f'{int(width)}',
+                va='center', ha='left', fontsize=8, fontweight='bold', color='#0f172a')
+                
+    plt.tight_layout()
+    chart_seksi_path = 'Source/chart_seksi.png'
+    plt.savefig(chart_seksi_path, bbox_inches='tight', facecolor='white')
+    plt.close()
+    chart_paths['seksi'] = chart_seksi_path
+
+    # 2. Peran Doughnut Chart
+    fig, ax = plt.subplots(figsize=(4.5, 3.2), dpi=200)
+    peran_labels = ['Penyelenggara\n(38)', 'Peserta\n(10)', 'Pembicara\n(5)']
+    peran_sizes = [38, 10, 5]
+    peran_colors = ['#006837', '#0284c7', '#7c3aed']
+    
+    wedges, texts, autotexts = ax.pie(
+        peran_sizes, labels=peran_labels, colors=peran_colors, autopct='%1.1f%%',
+        startangle=140, pctdistance=0.68,
+        wedgeprops=dict(width=0.42, edgecolor='white', linewidth=2),
+        textprops=dict(fontsize=7.5, color='#1e293b')
+    )
+    for autotext in autotexts:
+        autotext.set_color('white')
+        autotext.set_weight('bold')
+        autotext.set_fontsize(7.5)
+        
+    ax.set_title('Peran ISNU dalam Kegiatan', fontsize=10, fontweight='bold', color='#004d28', pad=8)
+    plt.tight_layout()
+    chart_peran_path = 'Source/chart_peran.png'
+    plt.savefig(chart_peran_path, bbox_inches='tight', facecolor='white')
+    plt.close()
+    chart_paths['peran'] = chart_peran_path
+
+    # 3. Timeline Area Chart (Tren 2022 - 2026)
+    fig, ax = plt.subplots(figsize=(8, 2.5), dpi=200)
+    years = ['2022', '2023', '2024', '2025', '2026']
+    counts = [3, 17, 15, 8, 10]
+    
+    ax.plot(years, counts, color='#006837', marker='o', linewidth=2.5, markersize=6, markerfacecolor='#d97706', markeredgecolor='white', markeredgewidth=1.5)
+    ax.fill_between(years, counts, color='#006837', alpha=0.15)
+    ax.set_title('Tren Grafik Jumlah Kegiatan Khidmah per Tahun (2022 - 2026)', fontsize=10, fontweight='bold', color='#004d28', pad=8)
+    ax.set_ylim(0, 20)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color('#cbd5e1')
+    ax.spines['left'].set_color('#cbd5e1')
+    ax.yaxis.grid(True, linestyle='--', alpha=0.5, color='#e2e8f0')
+    ax.set_axisbelow(True)
+    ax.tick_params(axis='both', labelsize=8)
+    
+    for x, y in zip(years, counts):
+        ax.annotate(f'{y} Kegiatan', (x, y), textcoords="offset points", xytext=(0, 6), ha='center', fontsize=8, fontweight='bold', color='#006837')
+
+    plt.tight_layout()
+    chart_timeline_path = 'Source/chart_timeline.png'
+    plt.savefig(chart_timeline_path, bbox_inches='tight', facecolor='white')
+    plt.close()
+    chart_paths['timeline'] = chart_timeline_path
+
+    return chart_paths
+
 def build_pdf():
     pdf_filename = "Source/Dokumen_LPJ_PC_ISNU_Kota_Surabaya_2022-2026.pdf"
     os.makedirs("Source", exist_ok=True)
     
+    # Generate charts
+    chart_paths = generate_pdf_charts()
+
     doc = SimpleDocTemplate(
         pdf_filename,
         pagesize=A4,
@@ -77,43 +175,43 @@ def build_pdf():
         'CoverTitle',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=22,
-        leading=26,
+        fontSize=20,
+        leading=24,
         textColor=c_primary,
         alignment=1, # Center
-        spaceAfter=10
+        spaceAfter=8
     )
     
     style_cover_subtitle = ParagraphStyle(
         'CoverSubtitle',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=13,
-        leading=17,
+        fontSize=12,
+        leading=16,
         textColor=c_dark,
         alignment=1,
-        spaceAfter=15
+        spaceAfter=12
     )
 
     style_cover_meta = ParagraphStyle(
         'CoverMeta',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9.5,
-        leading=14,
+        fontSize=9,
+        leading=13,
         textColor=colors.HexColor("#334155"),
         alignment=1,
-        spaceAfter=20
+        spaceAfter=15
     )
 
     style_h1 = ParagraphStyle(
         'Heading1_Custom',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=14,
-        leading=18,
+        fontSize=13,
+        leading=17,
         textColor=c_dark,
-        spaceBefore=14,
+        spaceBefore=12,
         spaceAfter=8,
         keepWithNext=True
     )
@@ -122,8 +220,8 @@ def build_pdf():
         'Heading2_Custom',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=11,
-        leading=15,
+        fontSize=10.5,
+        leading=14,
         textColor=c_primary,
         spaceBefore=10,
         spaceAfter=6,
@@ -134,16 +232,6 @@ def build_pdf():
         'Body_Custom',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9,
-        leading=13.5,
-        textColor=c_text,
-        spaceAfter=6
-    )
-
-    style_body_bold = ParagraphStyle(
-        'BodyBold_Custom',
-        parent=styles['Normal'],
-        fontName='Helvetica-Bold',
         fontSize=9,
         leading=13.5,
         textColor=c_text,
@@ -181,29 +269,29 @@ def build_pdf():
     story = []
 
     # ------------------ COVER / HEADER TITLE ------------------
-    story.append(Paragraph("PIMPINAN CABANG IKATAN SARJANA NAHDLATUL ULAMA", ParagraphStyle('TopHeader', fontName='Helvetica-Bold', fontSize=10, leading=12, textColor=c_primary, alignment=1)))
-    story.append(Paragraph("KOTA SURABAYA", ParagraphStyle('TopHeader2', fontName='Helvetica-Bold', fontSize=12, leading=14, textColor=c_dark, alignment=1, spaceAfter=8)))
-    story.append(HRFlowable(width="100%", thickness=2, color=c_primary, spaceAfter=15))
+    story.append(Paragraph("PIMPINAN CABANG IKATAN SARJANA NAHDLATUL ULAMA KOTA SURABAYA", ParagraphStyle('TopHeader', fontName='Helvetica-Bold', fontSize=10, leading=12, textColor=c_primary, alignment=1)))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=c_primary, spaceAfter=12))
     
     story.append(Paragraph("RANGKUMAN LAPORAN PERTANGGUNGJAWABAN (LPJ)", style_cover_title))
     story.append(Paragraph("Masa Khidmat 2022 – 2026", style_cover_subtitle))
     story.append(Paragraph("<b>Kesekretariatan:</b> Jl. Bubutan Gg. VI No.2, Alun-alun Contong, Bubutan, Kota Surabaya<br/><b>Kontak:</b> 081330278721 | <b>Email:</b> isnukotasurabaya@gmail.com | <b>Website:</b> https://isnusurabaya.or.id", style_cover_meta))
     
-    story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#bbf7d0"), spaceAfter=15))
+    story.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#bbf7d0"), spaceAfter=12))
 
-    # ------------------ BAB I: RINGKASAN EKSEKUTIF & STATISTIK ------------------
-    story.append(Paragraph("BAB I: RINGKASAN EKSEKUTIF & STATISTIK KHIDMAH", style_h1))
+    # ------------------ BAB I: RINGKASAN EKSEKUTIF & VISUALISASI GRAFIK ------------------
+    story.append(Paragraph("BAB I: RINGKASAN EKSEKUTIF & VISUALISASI GRAFIK KHIDMAH", style_h1))
     story.append(Paragraph(
         "Pimpinan Cabang Ikatan Sarjana Nahdlatul Ulama (PC ISNU) Kota Surabaya Masa Khidmat 2022–2026 telah melaksanakan seluruh agenda jam'iyyah dan pengabdian masyarakat secara berkelanjutan. Laporan ini merangkum seluruh rekam jejak kegiatan, regulasi organisasi, publikasi riset ilmiah, prestasi PWNU Jatim Award, serta transparansi pengelolaan kas keuangan.",
         style_body
     ))
     
+    # Stat Metric Cards
     stat_data = [
         [
-            Paragraph("<b>53</b><br/><font size=7.5 color='#475569'>TOTAL KEGIATAN</font>", ParagraphStyle('C1', alignment=1, fontSize=12, leading=14, fontName='Helvetica-Bold', textColor=c_primary)),
-            Paragraph("<b>6</b><br/><font size=7.5 color='#475569'>SEKSI BIDANG KERJA</font>", ParagraphStyle('C2', alignment=1, fontSize=12, leading=14, fontName='Helvetica-Bold', textColor=c_gold)),
-            Paragraph("<b>38</b><br/><font size=7.5 color='#475569'>PENYELENGGARA</font>", ParagraphStyle('C3', alignment=1, fontSize=12, leading=14, fontName='Helvetica-Bold', textColor=colors.HexColor("#1d4ed8"))),
-            Paragraph("<b>5 / 10</b><br/><font size=7.5 color='#475569'>PEMBICARA / PESERTA</font>", ParagraphStyle('C4', alignment=1, fontSize=12, leading=14, fontName='Helvetica-Bold', textColor=colors.HexColor("#7e22ce")))
+            Paragraph("<b>53</b><br/><font size=7 color='#475569'>TOTAL KEGIATAN</font>", ParagraphStyle('C1', alignment=1, fontSize=11, leading=13, fontName='Helvetica-Bold', textColor=c_primary)),
+            Paragraph("<b>6</b><br/><font size=7 color='#475569'>SEKSI BIDANG KERJA</font>", ParagraphStyle('C2', alignment=1, fontSize=11, leading=13, fontName='Helvetica-Bold', textColor=c_gold)),
+            Paragraph("<b>38</b><br/><font size=7 color='#475569'>PENYELENGGARA</font>", ParagraphStyle('C3', alignment=1, fontSize=11, leading=13, fontName='Helvetica-Bold', textColor=colors.HexColor("#1d4ed8"))),
+            Paragraph("<b>5 / 10</b><br/><font size=7 color='#475569'>PEMBICARA / PESERTA</font>", ParagraphStyle('C4', alignment=1, fontSize=11, leading=13, fontName='Helvetica-Bold', textColor=colors.HexColor("#7e22ce")))
         ]
     ]
     t_stat = Table(stat_data, colWidths=[125, 125, 125, 148])
@@ -211,13 +299,33 @@ def build_pdf():
         ('BACKGROUND', (0,0), (-1,-1), c_bg_light),
         ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#bbf7d0")),
         ('INNERGRID', (0,0), (-1,-1), 0.5, colors.HexColor("#cbd5e1")),
-        ('PADDING', (0,0), (-1,-1), 8),
+        ('PADDING', (0,0), (-1,-1), 6),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
     ]))
     story.append(t_stat)
     story.append(Spacer(1, 10))
 
-    # Seksi Distribution Table
+    # Visual Charts Section (Side-by-Side: Seksi Bar Chart & Peran Doughnut Chart)
+    story.append(Paragraph("Visualisasi Grafik Capaian Kegiatan & Peran ISNU", style_h2))
+    
+    img_seksi = Image(chart_paths['seksi'], width=265, height=155)
+    img_peran = Image(chart_paths['peran'], width=245, height=155)
+    
+    chart_grid = Table([[img_seksi, img_peran]], colWidths=[270, 253])
+    chart_grid.setStyle(TableStyle([
+        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+        ('PADDING', (0,0), (-1,-1), 0),
+    ]))
+    story.append(chart_grid)
+    story.append(Spacer(1, 8))
+
+    # Full Width Timeline Chart
+    img_timeline = Image(chart_paths['timeline'], width=523, height=160)
+    story.append(img_timeline)
+    story.append(Spacer(1, 12))
+
+    # Seksi Distribution Summary Table
     seksi_summary = [
         [Paragraph("Seksi Bidang Kerja", style_table_cell_header), Paragraph("Jumlah Kegiatan Khidmah", style_table_cell_header)],
         [Paragraph("1. Seksi Organisasi & Kerjasama Antar Lembaga", style_table_cell), Paragraph("10 Kegiatan", style_table_cell_bold)],
@@ -233,7 +341,7 @@ def build_pdf():
         ('BACKGROUND', (0,0), (-1,0), c_dark),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#cbd5e1")),
         ('BACKGROUND', (0,-1), (-1,-1), colors.HexColor("#e6f4ed")),
-        ('PADDING', (0,0), (-1,-1), 5),
+        ('PADDING', (0,0), (-1,-1), 4),
     ]))
     story.append(t_seksi)
     story.append(Spacer(1, 15))
@@ -253,7 +361,7 @@ def build_pdf():
     t_sk.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), c_primary),
         ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#cbd5e1")),
-        ('PADDING', (0,0), (-1,-1), 5),
+        ('PADDING', (0,0), (-1,-1), 4.5),
     ]))
     story.append(t_sk)
     story.append(Spacer(1, 10))
@@ -289,7 +397,7 @@ def build_pdf():
     t_quote.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), c_bg_light),
         ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#bbf7d0")),
-        ('PADDING', (0,0), (-1,-1), 10),
+        ('PADDING', (0,0), (-1,-1), 8),
     ]))
     story.append(t_quote)
     story.append(Spacer(1, 15))
@@ -412,7 +520,7 @@ def build_pdf():
 
     # Build document
     doc.build(story, canvasmaker=NumberedCanvas)
-    print(f"PDF generated successfully: {pdf_filename}")
+    print(f"PDF generated with embedded charts successfully: {pdf_filename}")
 
 if __name__ == "__main__":
     build_pdf()
