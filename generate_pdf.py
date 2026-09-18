@@ -400,7 +400,7 @@ def build_pdf():
         [Paragraph("1. Pimpinan Cabang", style_table_cell_bold), Paragraph("SK PC ISNU Kota Surabaya 2022-2026<br/><font color='#64748b'>No: 235/SK/PP-ISNU/XI/2022</font>", style_table_cell), Paragraph("SK Penetapan Susunan Pengurus PC ISNU Kota Surabaya oleh PP ISNU", style_table_cell)],
         [Paragraph("2. Tim Kerja", style_table_cell_bold), Paragraph("SK Tim Pengelola Website & Medsos<br/><font color='#64748b'>No: 13/SK/PC-ISNU/XII/2022</font>", style_table_cell), Paragraph("SK Pembentukan Tim IT & Pengelola Media Informasi", style_table_cell)],
         [Paragraph("3. Panitia", style_table_cell_bold), Paragraph("SK Panitia Konfercab VI ISNU Surabaya<br/><font color='#64748b'>No: 9/SK/PC-ISNU/VII/2026</font>", style_table_cell), Paragraph("SK Penetapan Panitia Konferensi Cabang VI", style_table_cell)],
-        [Paragraph("4. PAC (Kecamatan)", style_table_cell_bold), Paragraph("SK PAC ISNU Gunung Anyar, Gayungan, Lakarsantri, Sukolilo, Semampir, Wonokromo", style_table_cell), Paragraph("SK Pengesahan Pengurus Anak Cabang (PAC) Se-Kota Surabaya", style_table_cell)],
+        [Paragraph("4. PAC (Kecamatan)", style_table_cell_bold), Paragraph("SK Kolektif & Individual 10 PAC ISNU (Gayungan, Gunung Anyar, Jambangan, Lakarsantri, Semampir, Sukolilo, Tandes, Tenggilis Mejoyo, Wiyung, Wonokromo)<br/><font color='#64748b'>No: 1.171/SK/PW-ISNU/IX/2026</font>", style_table_cell), Paragraph("Surat Keputusan Pengesahan Kolektif 10 PAC ISNU Se-Kota Surabaya dari PW ISNU Jatim (12 Sept 2026)", style_table_cell)],
     ]
     t_sk = Table(sk_table_data, colWidths=[110, 240, 173])
     t_sk.setStyle(TableStyle([

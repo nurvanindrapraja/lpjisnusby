@@ -969,46 +969,81 @@ const LPJ_DATA = {
     "desc": "Surat Keputusan Penetapan Panitia Konferensi Cabang VI ISNU Kota Surabaya"
   },
   {
-    "title": "SK PAC ISNU Gunung Anyar",
-    "number": "805/SK/PW-ISNU/XI/2022",
-    "category": "Pimpinan Anak Cabang",
-    "file": "Source/SK/805-PAC GUNUNG ANYAR.pdf",
-    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang ISNU Kecamatan Gunung Anyar"
+    "title": "SK Kolektif 10 PAC ISNU Surabaya (Induk PW ISNU Jatim)",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
+    "category": "Pimpinan Anak Cabang (Induk)",
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK 10 PAC Surabaya - induk PW ISNU Jatim.pdf",
+    "desc": "Surat Keputusan Induk Pengesahan Kolektif 10 Pimpinan Anak Cabang (PAC) ISNU Se-Kota Surabaya dari PW ISNU Jawa Timur (12 September 2026)"
   },
   {
     "title": "SK PAC ISNU Gayungan",
-    "number": "806/SK/PW-ISNU/XI/2022",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
     "category": "Pimpinan Anak Cabang",
-    "file": "Source/SK/806-PAC GAYUNGAN.pdf",
-    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang ISNU Kecamatan Gayungan"
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Gayungan.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Gayungan Masa Khidmat 2026-2029"
+  },
+  {
+    "title": "SK PAC ISNU Gunung Anyar",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
+    "category": "Pimpinan Anak Cabang",
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Gunung Anyar.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Gunung Anyar Masa Khidmat 2026-2029"
+  },
+  {
+    "title": "SK PAC ISNU Jambangan",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
+    "category": "Pimpinan Anak Cabang",
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Jambangan.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Jambangan Masa Khidmat 2026-2029"
   },
   {
     "title": "SK PAC ISNU Lakarsantri",
-    "number": "807/SK/PW-ISNU/XI/2022",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
     "category": "Pimpinan Anak Cabang",
-    "file": "Source/SK/807-PAC LAKARSANTRI.pdf",
-    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang ISNU Kecamatan Lakarsantri"
-  },
-  {
-    "title": "SK PAC ISNU Sukolilo",
-    "number": "808/SK/PW-ISNU/XI/2022",
-    "category": "Pimpinan Anak Cabang",
-    "file": "Source/SK/808-PAC SUKOLILO.pdf",
-    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang ISNU Kecamatan Sukolilo"
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Lakarsantri.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Lakarsantri Masa Khidmat 2026-2029"
   },
   {
     "title": "SK PAC ISNU Semampir",
-    "number": "809/SK/PW-ISNU/XI/2022",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
     "category": "Pimpinan Anak Cabang",
-    "file": "Source/SK/SK PAC Semampir.pdf",
-    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang ISNU Kecamatan Semampir"
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Semampir.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Semampir Masa Khidmat 2026-2029"
+  },
+  {
+    "title": "SK PAC ISNU Sukolilo",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
+    "category": "Pimpinan Anak Cabang",
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Sukolilo.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Sukolilo Masa Khidmat 2026-2029"
+  },
+  {
+    "title": "SK PAC ISNU Tandes",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
+    "category": "Pimpinan Anak Cabang",
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Tandes.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Tandes Masa Khidmat 2026-2029"
+  },
+  {
+    "title": "SK PAC ISNU Tenggilis Mejoyo",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
+    "category": "Pimpinan Anak Cabang",
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Tenggilis Mejoyo.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Tenggilis Mejoyo Masa Khidmat 2026-2029"
+  },
+  {
+    "title": "SK PAC ISNU Wiyung",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
+    "category": "Pimpinan Anak Cabang",
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Wiyung.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Wiyung Masa Khidmat 2026-2029"
   },
   {
     "title": "SK PAC ISNU Wonokromo",
-    "number": "810/SK/PW-ISNU/XI/2022",
+    "number": "1.171/SK/PW-ISNU/IX/2026",
     "category": "Pimpinan Anak Cabang",
-    "file": "Source/SK/SK PAC Wonokromo.pdf",
-    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang ISNU Kecamatan Wonokromo"
+    "file": "Source/SK/SK 10 PAC 12 Sept 2026/1.171 - SK PAC Wonokromo.pdf",
+    "desc": "Surat Keputusan Pengesahan Pengurus Anak Cabang (PAC) ISNU Kecamatan Wonokromo Masa Khidmat 2026-2029"
   }
 ],
   sopFiles: [
